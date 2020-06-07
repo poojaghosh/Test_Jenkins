@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven-2'
+        maven 'Maven-3'
         jdk 'Java jdk'
     }
     stages {
@@ -16,13 +16,9 @@ pipeline {
 
         stage ('Build') {
             steps {
-                bat 'mvn -Dmaven.test.failure.ignore=true install' 
+                //bat 'mvn -Dmaven.test.failure.ignore=true install' 
+				bat 'mvn clean package'
             }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml' 
-                }
-            }
-        }
+          }
     }
 }
